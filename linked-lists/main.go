@@ -111,5 +111,4 @@ func main() {
 	emptyList.printListData()
 	mylist.append(node7)
 	mylist.printListData()
-	fmt.Println(mylist.searchNode(133))
 }
