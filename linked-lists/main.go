@@ -21,6 +21,30 @@ func (l *linkedList) prepend(n *node) {
 	l.length++
 }
 
+// append at end of linked list
+func (l *linkedList) append(n *node) {
+	// if list is empty
+	if l.length == 0 {
+		l.head = n
+		l.head.next = nil
+		l.length++
+		return
+	}
+
+	// If the list only has one node
+	if l.head.next == nil {
+		l.head.next = n
+	} else {
+		currentNode := l.head
+		for currentNode.next != nil {
+			currentNode = currentNode.next
+		}
+		currentNode.next = n
+	}
+	l.length++
+	return
+}
+
 func (l linkedList) printListData() {
 	toPrint := l.head
 	for l.length != 0 {
@@ -54,7 +78,7 @@ func (l *linkedList) deleteWithValue(value int) {
 		}
 		previousToDelete = previousToDelete.next
 	}
-	
+
 	previousToDelete.next = previousToDelete.next.next
 	l.length--
 }
@@ -67,6 +91,7 @@ func main() {
 	node4 := &node{value: 11}
 	node5 := &node{value: 7}
 	node6 := &node{value: 2}
+	node7 := &node{value: 1337}
 	mylist.prepend(node1)
 	mylist.prepend(node2)
 	mylist.prepend(node3)
@@ -78,5 +103,13 @@ func main() {
 	mylist.deleteWithValue(2)
 	mylist.printListData()
 	emptyList := linkedList{}
+	emptyList.printListData()
 	emptyList.deleteWithValue(10)
+	emptyList.append(node7)
+	emptyList.printListData()
+	emptyList.append(node6)
+	emptyList.printListData()
+	mylist.append(node7)
+	mylist.printListData()
+	fmt.Println(mylist.searchNode(133))
 }
